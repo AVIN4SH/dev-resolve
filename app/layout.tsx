@@ -5,14 +5,39 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
+import { Inter, Space_Grotesk } from "next/font/google";
+import type { Metadata } from "next"; // this is for providing type to metadata
 import React from "react";
+
+import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
+});
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-spaceGrotesk",
+});
+
+export const metadata: Metadata = {
+  title: "DevResolve",
+  description:
+    "DevResolve is a community-driven platform for developers to ask and answer questions, share knowledge, and find solutions to coding challenges. Join now to contribute, collaborate, and grow your programming skills.",
+  keywords:
+    "DevResolve, developer questions, coding answers, programming solutions, software development, developer community, coding help, tech Q&A",
+  icons: {
+    icon: "/assets/images/site-logo.svg",
+  },
+};
 
 function Header() {
   return (
     <header
       style={{ display: "flex", justifyContent: "space-between", padding: 20 }}
     >
-      <h1>My App</h1>
       <SignedIn>
         {/* Mount the UserButton component */}
         <UserButton />
@@ -32,8 +57,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <ClerkProvider>
+      <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
+        <ClerkProvider
+          appearance={{
+            elements: {
+              formButtonPrimary: "primary-gradient",
+              footerActionLink: "primary-text-gradient hover:text-primary-500",
+            },
+          }}
+        >
           <Header />
           {children}
         </ClerkProvider>
