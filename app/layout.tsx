@@ -10,6 +10,7 @@ import type { Metadata } from "next"; // this is for providing type to metadata
 import React from "react";
 
 import "./globals.css";
+import { ThemeProvider } from "@/context/themeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -66,8 +67,10 @@ export default function RootLayout({
             },
           }}
         >
-          <Header />
-          {children}
+          <ThemeProvider>
+            <Header />
+            {children}
+          </ThemeProvider>
         </ClerkProvider>
       </body>
     </html>
