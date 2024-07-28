@@ -10,20 +10,24 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [mode, setMode] = useState("");
-
-  const handleThemeChange = () => {
-    if (mode === "dark") {
-      setMode("light");
-      document.documentElement.classList.add("light");
-    } else {
-      setMode("dark");
-      document.documentElement.classList.add("dark");
-    }
-  };
+  const [mode, setMode] = useState<string>("");
 
   useEffect(() => {
-    handleThemeChange();
+    const initialMode = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
+    setMode(initialMode);
+  }, []);
+
+  useEffect(() => {
+    if (mode === "dark") {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    } else {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    }
   }, [mode]);
 
   return (
@@ -40,5 +44,5 @@ export function useTheme() {
     throw new Error("useTheme must be used within ThemeProvider");
   }
 
-  return context; // if no error, we return that context
+  return context;
 }
