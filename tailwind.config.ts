@@ -7,7 +7,9 @@ const config: Config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./@/**/*.{ts,tsx}",
   ],
+  prefix: "",
   theme: {
     container: {
       center: true,
@@ -18,6 +20,11 @@ const config: Config = {
     },
     extend: {
       colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
           500: "#FF7000",
           100: "#FFF1E6",
@@ -38,34 +45,59 @@ const config: Config = {
           400: "#858EAD",
         },
         "accent-blue": "#1DA1F2",
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        fontFamily: {
+          inter: ["var(--font-inter)"],
+          spaceGrotesk: ["var(--font-spaceGrotesk)"],
+        },
+        boxShadow: {
+          "light-100":
+            "0px 12px 20px 0px rgba(184, 184, 184, 0.03), 0px 6px 12px 0px rgba(184, 184, 184, 0.02), 0px 2px 4px 0px rgba(184, 184, 184, 0.03)",
+          "light-200": "10px 10px 20px 0px rgba(218, 213, 213, 0.10)",
+          "light-300": "-10px 10px 20px 0px rgba(218, 213, 213, 0.10)",
+          "dark-100": "0px 2px 10px 0px rgba(46, 52, 56, 0.10)",
+          "dark-200": "2px 0px 20px 0px rgba(39, 36, 36, 0.04)",
+        },
+        backgroundImage: {
+          "auth-dark": "url('/assets/images/auth-dark.png')",
+          "auth-light": "url('/assets/images/auth-light.png')",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
       },
-      fontFamily: {
-        inter: ["var(--font-inter)"],
-        spaceGrotesk: ["var(--font-spaceGrotesk)"],
-      },
-      boxShadow: {
-        "light-100":
-          "0px 12px 20px 0px rgba(184, 184, 184, 0.03), 0px 6px 12px 0px rgba(184, 184, 184, 0.02), 0px 2px 4px 0px rgba(184, 184, 184, 0.03)",
-        "light-200": "10px 10px 20px 0px rgba(218, 213, 213, 0.10)",
-        "light-300": "-10px 10px 20px 0px rgba(218, 213, 213, 0.10)",
-        "dark-100": "0px 2px 10px 0px rgba(46, 52, 56, 0.10)",
-        "dark-200": "2px 0px 20px 0px rgba(39, 36, 36, 0.04)",
-      },
-      backgroundImage: {
-        "auth-dark": "url('/assets/images/auth-dark.png')",
-        "auth-light": "url('/assets/images/auth-light.png')",
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       screens: {
         xs: "420px",
       },
       keyframes: {
         "accordion-down": {
-          from: { height: 0 },
+          from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
+          to: { height: "0" },
         },
       },
       animation: {
@@ -76,4 +108,5 @@ const config: Config = {
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
+
 export default config;
