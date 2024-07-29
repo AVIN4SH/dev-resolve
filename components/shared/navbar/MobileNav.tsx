@@ -70,7 +70,7 @@ const MobileNav = () => {
             height={23}
           />
           <p className="h2-bold font-spaceGrotesk text-dark100_light900 ">
-            Dev <span className="text-primary-500">Resolve</span>
+            Dev<span className="text-primary-500">Resolve</span>
           </p>
         </Link>
         <div>
