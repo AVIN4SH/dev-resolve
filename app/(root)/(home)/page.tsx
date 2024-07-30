@@ -1,7 +1,44 @@
+import HomeFilters from "@/components/home/HomeFilters";
+import QuestionCard from "@/components/QuestionCard";
+import Filter from "@/components/shared/Filter";
+import NoResult from "@/components/shared/NoResult";
 import LocalSearchBar from "@/components/shared/search/LocalSearchBar";
 import { Button } from "@/components/ui/button";
+import { HomePageFilters } from "@/constants/Filters";
 import Link from "next/link";
 import React from "react";
+
+const questions = [
+  {
+    _id: "1",
+    title: "How to create a new project in Next js?",
+    tags: [
+      { _id: "1", name: "frontend" },
+      { _id: "2", name: "nextjs" },
+    ],
+    author: [{ _id: "1", name: "Echiiro Oda", picture: "url-to-picture-1" }],
+    upvotes: 10,
+    views: 125,
+    answers: [],
+    createdAt: new Date("2024-07-30T12:00:00.000Z"),
+  },
+  {
+    _id: "2",
+    title: "How to center a div?",
+    tags: [
+      { _id: "1", name: "css" },
+      { _id: "2", name: "flexbox" },
+      { _id: "3", name: "grid" },
+    ],
+    author: [
+      { _id: "2", name: "Programming with Mosh", picture: "url-to-picture-2" },
+    ],
+    upvotes: 27,
+    views: 351,
+    answers: [],
+    createdAt: new Date("2024-08-03T10:00:00.000Z"),
+  },
+];
 
 const Home = () => {
   return (
@@ -22,6 +59,39 @@ const Home = () => {
           placeholder="Search for questions"
           otherClasses="flex-1"
         />
+        <Filter
+          filters={HomePageFilters}
+          otherClasses="min-h-[56px] sm:min-w-[170px]"
+          containerClasses="hidden max-md:flex"
+        />
+      </div>
+      <HomeFilters />
+      <div className="mt-10 flex w-full flex-col gap-6">
+        {questions.length > 0 ? (
+          questions.map((question) => {
+            return (
+              <QuestionCard
+                key={question._id}
+                _id={question._id}
+                title={question.title}
+                tags={question.tags}
+                author={question.author}
+                upvotes={question.upvotes}
+                views={question.views}
+                answers={question.answers}
+                createdAt={question.createdAt}
+              />
+            );
+          })
+        ) : (
+          <NoResult
+            title="There's no question to show"
+            description="Be the first to break the silence! 🚀 Ask a Question & kickstart
+        the discussion. 💡 Get Involved Now!!!"
+            link="/ask-question"
+            linkTitle="Ask a Question"
+          />
+        )}
       </div>
     </>
   );

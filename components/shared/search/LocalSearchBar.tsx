@@ -9,7 +9,7 @@ interface CustomInputProps {
   iconPosition: string;
   imgSrc: string;
   placeholder: string;
-  otherClasses: string;
+  otherClasses?: string;
 }
 
 const LocalSearchBar = ({
@@ -37,7 +37,7 @@ const LocalSearchBar = ({
         type="text"
         value=""
         onChange={() => {}}
-        className="paragraph-regular no-focus placeholder  border-none  shadow-none outline-none placeholder:text-light-400 "
+        className="paragraph-regular no-focus placeholder  border-none  shadow-none outline-none placeholder:text-gray-600 placeholder:dark:text-white/75 "
       />
       {iconPosition === "right" && ( // for icon when to be shown of right side
         <Image
