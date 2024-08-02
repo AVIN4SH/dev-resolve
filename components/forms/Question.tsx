@@ -1,5 +1,8 @@
 "use client";
 
+import React, { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -18,6 +21,8 @@ import { Input } from "@/components/ui/input";
 import { QuestionsSchema } from "@/lib/validations";
 
 const Question = () => {
+  const [value, setValue] = useState("");
+
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
     defaultValues: {
@@ -29,6 +34,15 @@ const Question = () => {
   function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     console.log(values);
   }
+
+  const modules = {
+    toolbar: [
+      ["bold", "italic"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ align: [] }, "link"],
+      ["code-block"],
+    ],
+  };
 
   return (
     <Form {...form}>
@@ -68,8 +82,16 @@ const Question = () => {
                 <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl className="mt-3.5">
-                {/* @TODO: add an editor component that looks like textarea and has editing features */}
+                <ReactQuill
+                  className="no-focus paragraph-regular background-light800_dark300 light-border-2 text-dark300_light700 min-h-[56px] rounded-xl border"
+                  theme="snow"
+                  value={value}
+                  onChange={setValue}
+                  placeholder="describe here"
+                  modules={modules}
+                />
               </FormControl>
+
               <FormDescription className="body-regular mt-2.5 text-light-500">
                 Introduce the problem & expand on what you put in the title.
                 Minimum 20 characters.
